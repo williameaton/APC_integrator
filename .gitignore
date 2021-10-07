@@ -1,0 +1,13 @@
+# Files to ignore in git tracking 
+# Last updated: 6th October 2021 (W Eaton) 
+
+
+# Ignore any .o and .d files generated during compilation 
+*.[od]
+
+# Keeping the HW instructions in directory 
+*.pdf
+
+# Ignore executable 
+ode_solve 
+
