@@ -17,7 +17,7 @@ class ModelFactory{
         ModelFactory();
         ~ModelFactory();
 
-        Model &createModel(std::string type_str, double *params);
+        Model *createModel(std::string type_str, double *params);
 };
 
 #endif // MODEL_FACTORY_H

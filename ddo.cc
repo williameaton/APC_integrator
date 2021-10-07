@@ -5,6 +5,7 @@ using namespace std;  // This line is preferred in C++ but not
 		      // strictly necessary to use cos() as-is. We can
 		      // discuss why.
 
+
 DDOscillator::DDOscillator(double *params) : omega_(params[0]),
 					     F_(params[1]),
 					     beta_(params[2]),
