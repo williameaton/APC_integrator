@@ -11,3 +11,6 @@
 # Ignore executable 
 ode_solve 
 
+# Ignoring VS-Code and MacOS files
+*.DS_store
+*.vscode* 

@@ -42,8 +42,6 @@ This program facilitates numerical integration for systems of both linear and no
 - Write Example 2 for Lotka-Voltera equation system 
 - ode_solve.cc 
 - ode_solve.h 
-- model-factory.cc
-- model-factory.h
 - integrator-factory.cc
 - integrator-factory.h
 - rk4.cc

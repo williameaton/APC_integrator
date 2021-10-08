@@ -14,12 +14,13 @@ IntegratorFactory::IntegratorFactory() {}
 IntegratorFactory::~IntegratorFactory() {}
 
 
-Integrator* createIntegrator(std::string type, double dt, const Model &model){
+Integrator* createIntegrator(std::string type, double dt, const Model *model){
     // FUNCTION RETURNS A PTR TO AN INTEGRATOR OBJECT OF THE DESIRED TYPE
 
     if (type=="euler"){
         // Create a model of type euler 
-        return new Euler(dt, model);
+        Euler *new_model = new Euler(dt, *model);
+        return new_model;
     }
 
     else if(type=="rk4"){
