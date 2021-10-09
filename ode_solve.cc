@@ -5,10 +5,12 @@
 #include "model-factory.h"
 #include "integrator-factory.h"
 #include <assert.h>  
+#include "rk4.h"
 
 class DDOscillator;
 class Euler; 
 class Model;
+class Rk4; 
 class Integrator;
 class ModelFactory; 
 
@@ -17,7 +19,6 @@ class ModelFactory;
 void printState(double t, double *x){
     printf("%15.8f %15.8f %15.8f\n", t, x[0], x[1]);
 }
-
 
 
 // Class not currently functional 
@@ -64,7 +65,7 @@ int main(int argc, char **argv){
      //IntegratorFactory *factory_1 = new IntegratorFactory();
     //IntegratorFactory int_factory; 
     //Integrator *integrator = factory_1->createIntegrator(integrator_inpt_string, dt, model);
-    Euler integrator(dt, *model); 
+    Rk4 integrator(dt, *model); 
 
     // Need some function setInitConditions()
     // Generate x_array: 
