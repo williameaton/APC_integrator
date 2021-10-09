@@ -44,8 +44,6 @@ This program facilitates numerical integration for systems of both linear and no
 - ode_solve.h 
 - integrator-factory.cc
 - integrator-factory.h
-- rk4.cc
-- rk4.h
 - ab2.cc
 - ab2.h
 - lv.cc
@@ -54,7 +52,6 @@ This program facilitates numerical integration for systems of both linear and no
 
 ## Tasks in order: 
 - Sort out user inputs 
-- Write RK4 
 - Write AB2 
 - Write model factory 
 - Write LV 
