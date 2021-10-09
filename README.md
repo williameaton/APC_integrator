@@ -50,3 +50,11 @@ This program facilitates numerical integration for systems of both linear and no
 - ab2.h
 - lv.cc
 - lv.h
+
+
+## Tasks in order: 
+- Sort out user inputs 
+- Write RK4 
+- Write AB2 
+- Write model factory 
+- Write LV 
