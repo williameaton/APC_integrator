@@ -40,18 +40,13 @@ This program facilitates numerical integration for systems of both linear and no
 
 - Complete parameter table in README.md 
 - Write Example 2 for Lotka-Voltera equation system 
-- ode_solve.cc 
-- ode_solve.h 
 - integrator-factory.cc
 - integrator-factory.h
-- ab2.cc
-- ab2.h
 - lv.cc
 - lv.h
 
 
 ## Tasks in order: 
 - Sort out user inputs 
-- Write AB2 
 - Write model factory 
 - Write LV 

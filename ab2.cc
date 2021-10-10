@@ -31,8 +31,11 @@ double *Ab2::sumArrays(double *out_array, double *arr1, double *arr2, double mul
 
 
 int Ab2::Step(double t, double *x){ 
+
     // Calculate fx
     model_.rhs(t, x, fx_); 
+    
+    
 
     if (counter_==0){
         
