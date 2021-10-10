@@ -14,3 +14,9 @@ ode_solve
 # Ignoring VS-Code and MacOS files
 *.DS_store
 *.vscode* 
+
+# Ignoring plotting scripts for LV
+*.py
+*.txt
+*.idea 
+*.xml

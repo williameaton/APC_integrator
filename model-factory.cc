@@ -1,13 +1,12 @@
 
 #include "ddo.h"
+#include "lv.h"
 #include <string>
 #include <iostream>
 
 
 class DDOscillator;
-class Euler; 
 class Model;
-class Integrator;
 
 #include "model-factory.h"
 
@@ -24,8 +23,7 @@ Model *ModelFactory::createModel(std::string type_str, double *params){
     } 
 
     else if (type_str=="lv"){
-        std::cout << "ERROR: LV class under construction." << "\n";
-        return NULL;
+        return new Lv(params);
     }
 
     else{

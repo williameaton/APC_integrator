@@ -47,6 +47,5 @@ This program facilitates numerical integration for systems of both linear and no
 
 
 ## Tasks in order: 
-- Sort out user inputs 
 - Write model factory 
 - Write LV 
