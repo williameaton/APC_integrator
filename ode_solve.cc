@@ -1,6 +1,7 @@
 
 #include "ddo.h"
 #include <string>
+#include <vector>
 #include <iostream>
 #include "model-factory.h"
 #include "integrator-factory.h"
@@ -24,27 +25,74 @@ void printState(double t, double *x){
 
 
 // Class not currently functional 
-class InputAnalyser{
+class Inputs{
     // Example input: ./ode_solve ddo "2.0 1.5 0.25 1.0" "3.0 1.5 0.0" euler 0.1 40
     // Should therefore be argc = 7
 
     public: 
-        InputAnalyser(int argc, char **argv): argc_(argc), argv_(argv){};
-        ~InputAnalyser(){};
+        Inputs(){
+            // Allocate memory for Params and ICs 
+            params = new double[4];
+            ICs = new double[3];
+        };
+        
+        ~Inputs(){
 
-    std::string input_strs[6]; // Array holding seperate strings 
-    
+              delete [] params;
+              delete [] ICs;
+        };
+
+
+        int extractInputs(int argc_, char **argv_){
+
+            checkArgs_(argc_); // Check inpujt is okay 
+            
+            // Convert each element of argv_ to a string object in a vector args 
+            std::vector<std::string> args(argc_);     
+            for (int i = 0; i < argc_; ++i){
+                args[i] = argv_[i];
+            }
+
+            // Assign various strings to members using conversion methods
+            model_str = args[1];
+            processString_(params, args[2], 4);
+            processString_(ICs, args[3], 3);
+            integrator_str = args[4]; 
+            dt = std::stod(args[5]);
+            timesteps = std::stoi(args[6]);
+
+            return 0;
+        }; 
+
+        std::string model_str; // Array holding model string
+        std::string integrator_str; // Array holding integrator strings 
+        double *params; 
+        double *ICs; 
+        double dt; 
+        int timesteps; 
+
+
     private: 
-    int argc_; 
-    char **argv_; 
 
-    int checkArgs_(){
-        // Check number of args is 7 
-        assert(argc_==7); 
-        return 0;
-    }
+        int checkArgs_(int num_args_){
+            // Check number of args is 7 
+            assert(num_args_==7); 
+            return 0;
+        }
+
+
+        int processString_(double *out_array, std::string ipt_str, int dim){
+            int position;
+
+            for (int k=0; k<dim; k++){
+                position = ipt_str.find(" "); // find first 
+                out_array[k] = std::stod(ipt_str.substr(0, position));
+                ipt_str = ipt_str.substr(position+1); // Update for next loop
+            }
+            return 0;
+        }
+
 };
-
 
 
 
@@ -52,37 +100,33 @@ class InputAnalyser{
 int main(int argc, char **argv){
 
     // Get parameters from the user and sort 
-    int N = 10;
-    double dt = 3.14159265359*6/N;
-    double params[4] = {0.5, 1.0, 0.25, 1.0}; //omega, F, beta, omega_0 
-    std::string model_inpt_string = "ddo";
-    std::string integrator_inpt_string = "euler";
-
+    Inputs user_i; 
+    user_i.extractInputs(argc, argv); 
 
     // Generate model using factory 
     ModelFactory model_factory; 
-    Model *model = model_factory.createModel(model_inpt_string, params); 
+    Model *model = model_factory.createModel(user_i.model_str, user_i.params); 
 
     // Generate integrator using factory 
-     //IntegratorFactory *factory_1 = new IntegratorFactory();
-    //IntegratorFactory int_factory; 
-    //Integrator *integrator = factory_1->createIntegrator(integrator_inpt_string, dt, model);
-    Ab2 integrator(dt, *model); 
+    Euler integrator(user_i.dt, *model); 
 
     // Need some function setInitConditions()
     // Generate x_array: 
-    int n = model->dimen();
-    double t = 0;
-    double x[n]; // Needs to be set to the initial conditions 
-    for(int j=0; j<n;++j){x[j]=0;}  // Set initial conditions that are a temporary trial 
+    double x[model->dimen()]; // Needs to be set to the initial conditions 
+    
+    //for(int j=0; j<n;++j){x[j]=0;}  // Set initial conditions that are a temporary trial 
+    double t = user_i.ICs[0];
+    x[0] = user_i.ICs[1];
+    x[1] = user_i.ICs[2];
+
 
 
     printState(t, x);
 
     // Loop: run step function of the model - need to print at each timestep --> function within integrator or seperate class? 
-    for (int i=0; i<N; ++i){
+    for (int i=0; i<user_i.timesteps; ++i){
         integrator.Step(t, x);
-        t += dt;
+        t += user_i.dt;
         printState(t, x);
     }
 
