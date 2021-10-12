@@ -6,16 +6,18 @@
 class Lv: public Model
 {   
 public:
-    Lv(double *params);
-    ~Lv();
+    Lv(double *params); // constructor
+    ~Lv();              // destructor 
 
-    int rhs(double t, const double *x, double *fx) const;
-    int dimen() const{
+    int rhs(double t, const double *x, double *fx) const; // calculates rates of change
+    
+    int dimen() const{  
+        // RETURNS DIMENSION OF MODEL                                    
         return dimen_;
     }; 
 
 private: 
-    double alpha_, beta_, gamma_, delta_;
+    double alpha_, beta_, gamma_, delta_; // parameters (see README.md)
     static const int dimen_ = 2; 
 };
 

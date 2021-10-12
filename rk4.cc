@@ -4,8 +4,6 @@
 
 
 // Class of type Integrator which provides numerical integration capability using 4th-order Runge-Kutta method:
-
-
 Rk4::Rk4(double dt, const Model &model) : dt_(dt), model_(model), dimen_(model.dimen()){
   // Constructor pre-allocates heap space for rhs() results
   fx_ = new double[dimen_];
@@ -14,6 +12,7 @@ Rk4::Rk4(double dt, const Model &model) : dt_(dt), model_(model), dimen_(model.d
 }
 
 Rk4::~Rk4(){
+    // DESTRUCTOR
     delete fx_; 
     delete K_; 
 }
@@ -27,10 +26,9 @@ double *Rk4::sumArrays(double *out_array, double *arr1, double *arr2, double mul
 }
 
 
-
-
 int Rk4::Step(double t, double *x){
-    double x_temp_[dimen_];
+    
+    double x_temp_[dimen_]; // holds x + c*K for calculating fx
 
     for (int i=0; i<RK_ORDER_; i++){
         

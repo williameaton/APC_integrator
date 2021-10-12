@@ -1,23 +1,17 @@
-
-#include "ddo.h"
-#include "lv.h"
 #include <string>
 #include <iostream>
-
+#include "ddo.h"
+#include "lv.h"
+#include "model-factory.h"
 
 class DDOscillator;
 class Model;
 
-#include "model-factory.h"
+ModelFactory::ModelFactory(){}; // constructor
+ModelFactory::~ModelFactory(){}; // destructor
 
-ModelFactory::ModelFactory(){};
-ModelFactory::~ModelFactory(){};
-
-
-
+// Construct and return ptr to correct model based on type_str 
 Model *ModelFactory::createModel(std::string type_str, double *params){
-
-    
     if (type_str=="ddo"){
         return new DDOscillator(params); 
     } 
@@ -27,7 +21,7 @@ Model *ModelFactory::createModel(std::string type_str, double *params){
     }
 
     else{
-        // Generate error message: 
+        // Invalid input - generate error message: 
         std::cout << "ERROR: invalid Model called..." << "\n";
         std::cout << "*** need to make this a proper error message ***" << "\n";
         return NULL;

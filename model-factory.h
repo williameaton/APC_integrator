@@ -5,7 +5,6 @@
 #include <string>
 #include <iostream>
 
-
 class DDOscillator;
 class Euler; 
 class Model;
@@ -14,10 +13,12 @@ class Integrator;
 
 class ModelFactory{
     public: 
-        ModelFactory();
-        ~ModelFactory();
+        ModelFactory();  // constructor
+        ~ModelFactory(); // destructor
 
+        // Function to generate model and pass to user
         Model *createModel(std::string type_str, double *params);
 };
+
 
 #endif // MODEL_FACTORY_H

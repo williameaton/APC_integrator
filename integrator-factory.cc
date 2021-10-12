@@ -19,8 +19,9 @@ Integrator* createIntegrator(std::string type, double dt, const Model *model){
 
     if (type=="euler"){
         // Create a model of type euler 
-        Euler *new_model = new Euler(dt, *model);
-        return new_model;
+        //Euler *new_model = new Euler(dt, *model);
+        //return new_model;
+        return new Euler(dt, *model);
     }
 
     else if(type=="rk4"){
