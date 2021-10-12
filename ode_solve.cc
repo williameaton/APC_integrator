@@ -19,12 +19,17 @@ class ModelFactory;
 
 
 // Class needs modifying to be flexible to the n of x - some iterative print/string appending 
-void printState(double t, double *x){
-    printf("%15.8f %15.8f %15.8f\n", t, x[0], x[1]);
+void printState(double t, double *x, int dimen){
+    
+    printf("%15.8f", t);
+    
+    for (int i=0; i<dimen; i++){
+        printf(" %15.8f", x[i]);
+    }
+    printf("\n");
 }
 
 
-// Class not currently functional 
 class Inputs{
     // Example input: ./ode_solve ddo "2.0 1.5 0.25 1.0" "3.0 1.5 0.0" euler 0.1 40
     // Should therefore be argc = 7
@@ -63,6 +68,16 @@ class Inputs{
 
             return 0;
         }; 
+
+        double initICs(double *x, int dimen){
+            double t = ICs[0];
+            
+            for (int i=0; i<dimen; i++){
+                x[i] = ICs[i+1];
+            }
+            return t;
+        }
+
 
         std::string model_str; // Array holding model string
         std::string integrator_str; // Array holding integrator strings 
@@ -107,32 +122,25 @@ int main(int argc, char **argv){
     ModelFactory model_factory; 
     Model *model = model_factory.createModel(user_i.model_str, user_i.params); 
 
-    // Generate integrator using factory 
+    // Generate integrator using factory  ********
     Euler integrator(user_i.dt, *model); 
 
-    // Need some function setInitConditions()
-    // Generate x_array: 
+    // Initialise conditions 
     double x[model->dimen()]; // Needs to be set to the initial conditions 
-    
-    //for(int j=0; j<n;++j){x[j]=0;}  // Set initial conditions that are a temporary trial 
-    double t = user_i.ICs[0];
-    x[0] = user_i.ICs[1];
-    x[1] = user_i.ICs[2];
+    double t = user_i.initICs(x, model->dimen());
 
 
-
-    printState(t, x);
-
+    printState(t, x, model->dimen());
     // Loop: run step function of the model - need to print at each timestep --> function within integrator or seperate class? 
     for (int i=0; i<user_i.timesteps; ++i){
         integrator.Step(t, x);
         t += user_i.dt;
-        printState(t, x);
+        printState(t, x, model->dimen());
     }
 
-
     // Destruction of any classes - possibly a factory to do this but might not be necessary? 
-
+    //model->~Model();
+    // integrator.~Euler();
 
     return 0;
 }

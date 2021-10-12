@@ -20,3 +20,5 @@ ode_solve
 *.txt
 *.idea 
 *.xml
+.pyc
+.cpython
