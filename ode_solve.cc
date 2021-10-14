@@ -46,11 +46,13 @@ int main(int argc, char **argv){
     // Generate model using factory 
     Model *model = ModelFactory::createModel(user_i.model_str, user_i.params); 
 
-    // Generate integrator using factory  ********
+    // Generate integrator using factory 
     Integrator *integrator = IntegratorFactory::createIntegrator(user_i.integrator_str, user_i.dt, model);
 
     // Initialise state variables and t 
-    double x[model->dimen()];  
+    double *x; 
+    x = new double[model->dimen()];
+    
     double t = user_i.initICs(x, model->dimen()); // IC for x updated in this function also
 
     // Print initial state and then loop through timesteps 
