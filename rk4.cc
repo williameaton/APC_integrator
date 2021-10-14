@@ -46,6 +46,8 @@ int Rk4::Step(double t, double *x){
         sumArrays(x_sum_, x_sum_, K_, 1, coeff_, dimen_); // X_sum += coeff*K
     }
 
+    delete x_temp_;
+    
     // Finally set x equal to x_sum: 
     sumArrays(x, x_sum_, x, 1, 0, dimen_);
 
