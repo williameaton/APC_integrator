@@ -13,8 +13,6 @@ class Model;
 
 
 // Empty constructor and destructor 
-IntegratorFactory::IntegratorFactory() {}
-IntegratorFactory::~IntegratorFactory() {}
 
 
 Integrator* IntegratorFactory::createIntegrator(std::string integrator_type, double dt, const Model *model){

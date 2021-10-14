@@ -4,11 +4,7 @@
 #include "lv.h"
 #include "model-factory.h"
 
-class DDOscillator;
 class Model;
-
-ModelFactory::ModelFactory(){} // constructor
-ModelFactory::~ModelFactory(){} // destructor
 
 // Construct and return ptr to correct model based on type_str 
 Model *ModelFactory::createModel(std::string type_str, double *params){
@@ -25,7 +21,6 @@ Model *ModelFactory::createModel(std::string type_str, double *params){
         std::cout << "ERROR: invalid Model called..." << "\n";
         std::cout << "*** need to make this a proper error message ***" << "\n";
         return NULL;
-
     }
 }
 

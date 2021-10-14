@@ -1,23 +1,11 @@
 // ********************** INCLUDES AND FORWARD DECLARATIONS **********************
-#include "ddo.h"
 #include <string>
 #include <vector>
 #include <iostream>
+#include <assert.h>  
+
 #include "model-factory.h"
 #include "integrator-factory.h"
-#include <assert.h>  
-#include "rk4.h"
-#include "ab2.h"
-
-class DDOscillator;
-class Euler; 
-class Model;
-class Rk4; 
-class Ab2; 
-class Integrator;
-class ModelFactory; 
-class IntegratorFactory;
-
 
 // Forward declarations: 
 void printState(double t, double *x, int dimen); 
@@ -56,13 +44,10 @@ int main(int argc, char **argv){
     user_i.extractInputs(argc, argv); 
 
     // Generate model using factory 
-    ModelFactory model_factory; 
-    Model *model = model_factory.createModel(user_i.model_str, user_i.params); 
+    Model *model = ModelFactory::createModel(user_i.model_str, user_i.params); 
 
     // Generate integrator using factory  ********
-    //Euler integrator(user_i.dt, *model); 
-    IntegratorFactory int_factory; 
-    Integrator *integrator = int_factory.createIntegrator(user_i.integrator_str, user_i.dt, model);
+    Integrator *integrator = IntegratorFactory::createIntegrator(user_i.integrator_str, user_i.dt, model);
 
     // Initialise state variables and t 
     double x[model->dimen()];  
@@ -79,10 +64,13 @@ int main(int argc, char **argv){
 
     // Destruction of any classes - possibly a factory to do this but might not be necessary? 
     delete model;
-    //delete integrator;
+    delete integrator;
 
     return 0;
 }
+
+
+
 
 
 
