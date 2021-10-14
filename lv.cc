@@ -16,6 +16,8 @@ int Lv::rhs(double t, const double *x, double *fx) const{
     fx[0] = alpha_*x[0] - beta_*x[0]*x[1];  // dR/dt = fx[0] = alpha*R - beta*R*F 
     fx[1] = gamma_*x[0]*x[1] - delta_*x[1]; // dF/dt = fx[1] = gamma*R*F - delta*F
 
+    (void) t; // silence compiler warning 
+    
     return 0;
 }
 

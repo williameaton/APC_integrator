@@ -60,20 +60,19 @@ int main(int argc, char **argv){
     Model *model = model_factory.createModel(user_i.model_str, user_i.params); 
 
     // Generate integrator using factory  ********
-    Euler integrator(user_i.dt, *model); 
-    //IntegratorFactory int_factory; 
-    //Integrator *integrator = int_factory.createIntegrator("euler", user_i.dt, model);
+    //Euler integrator(user_i.dt, *model); 
+    IntegratorFactory int_factory; 
+    Integrator *integrator = int_factory.createIntegrator(user_i.integrator_str, user_i.dt, model);
 
     // Initialise state variables and t 
     double x[model->dimen()];  
     double t = user_i.initICs(x, model->dimen()); // IC for x updated in this function also
 
-
     // Print initial state and then loop through timesteps 
     printState(t, x, model->dimen());
 
     for (int i=0; i<user_i.timesteps; ++i){
-        integrator.Step(t, x);              // Integrate one timestep
+        integrator->Step(t, x);              // Integrate one timestep
         t += user_i.dt;                     // Update time
         printState(t, x, model->dimen());   // Print output
     }
@@ -94,13 +93,13 @@ Inputs::Inputs(){
     // CONSTRUCTOR
     params = new double[4]; 
     ICs = new double[3];
-};
+}
         
 Inputs::~Inputs(){
     // DESTRUCTOR
     delete [] params;
     delete [] ICs;
-};
+}
 
 
 int Inputs::extractInputs(int argc_, char **argv_){
@@ -117,7 +116,7 @@ int Inputs::extractInputs(int argc_, char **argv_){
     timesteps = std::stoi(argv_[6]);
 
     return 0;
-}; 
+} 
 
 
 double Inputs::initICs(double *x, int dimen){

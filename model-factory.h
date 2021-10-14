@@ -5,10 +5,8 @@
 #include <string>
 #include <iostream>
 
-class DDOscillator;
-class Euler; 
+
 class Model;
-class Integrator;
 
 
 class ModelFactory{

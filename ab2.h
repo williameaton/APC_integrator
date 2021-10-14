@@ -6,7 +6,7 @@
 class Model; 
 
 
-class Ab2: Integrator
+class Ab2: public Integrator
 {
     
 public:

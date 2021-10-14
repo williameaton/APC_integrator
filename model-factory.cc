@@ -7,8 +7,8 @@
 class DDOscillator;
 class Model;
 
-ModelFactory::ModelFactory(){}; // constructor
-ModelFactory::~ModelFactory(){}; // destructor
+ModelFactory::ModelFactory(){} // constructor
+ModelFactory::~ModelFactory(){} // destructor
 
 // Construct and return ptr to correct model based on type_str 
 Model *ModelFactory::createModel(std::string type_str, double *params){
@@ -27,5 +27,5 @@ Model *ModelFactory::createModel(std::string type_str, double *params){
         return NULL;
 
     }
-};
+}
 

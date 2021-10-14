@@ -1,8 +1,11 @@
+
 #include <iostream>
 #include <string>
 #include "integrator-factory.h"
 #include "model.h"
 #include "euler.h"
+#include "rk4.h"
+#include "ab2.h"
 
 // Let the compiler know these classes will exist somewhere
 class Integrator; 
@@ -14,26 +17,23 @@ IntegratorFactory::IntegratorFactory() {}
 IntegratorFactory::~IntegratorFactory() {}
 
 
-Integrator* createIntegrator(std::string type, double dt, const Model *model){
+Integrator* IntegratorFactory::createIntegrator(std::string integrator_type, double dt, const Model *model){
     // FUNCTION RETURNS A PTR TO AN INTEGRATOR OBJECT OF THE DESIRED TYPE
 
-    if (type=="euler"){
-        // Create a model of type euler 
-        //Euler *new_model = new Euler(dt, *model);
-        //return new_model;
+    if (integrator_type=="euler"){
         return new Euler(dt, *model);
     }
 
-    else if(type=="rk4"){
+    else if(integrator_type=="rk4"){
         // Create a model of type RK4 
-        std::cout << "ERROR: RK4 under construction" << "\n";
-        return NULL;
+        return new Rk4(dt, *model);
+
     }
 
-    else if(type=="ab2"){
+    else if(integrator_type=="ab2"){
         // Create a model of type AB2 
-        std::cout << "ERROR: AB2 under construction" << "\n";
-        return NULL; 
+        return new Ab2(dt, *model);
+
     }
     
     else{
@@ -41,5 +41,4 @@ Integrator* createIntegrator(std::string type, double dt, const Model *model){
         std::cout << "*** need to make this a proper error message ***" << "\n";
         return NULL;
     }
-
 }

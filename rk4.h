@@ -6,7 +6,7 @@
 class Model; 
 
 
-class Rk4: Integrator
+class Rk4: public Integrator
 {
 public:
     Rk4(double dt, const Model &model); // constructor

@@ -18,7 +18,7 @@ class IntegratorFactory{
         IntegratorFactory();             // Constructor
         ~IntegratorFactory();		     // Destructor
         
-        Integrator* createIntegrator(std::string type, double dt, const Model *model);  // Factory function 
+        Integrator* createIntegrator(std::string integrator_type, double dt, const Model *model);  // Factory function 
     };
 
 #endif //INTEGRATOR_FACTORY_H_
