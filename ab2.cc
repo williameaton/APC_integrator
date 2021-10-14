@@ -35,6 +35,8 @@ int Ab2::Step(double t, double *x){
 
     model_.rhs(t, x, fx_);    // Calculate fx
 
+    
+
     if (counter_==0){
         // First timestep cant be done with AB2 - use RK4
 

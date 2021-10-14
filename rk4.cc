@@ -28,7 +28,9 @@ double *Rk4::sumArrays(double *out_array, double *arr1, double *arr2, double mul
 
 int Rk4::Step(double t, double *x){
     
-    double x_temp_[dimen_]; // holds x + c*K for calculating fx
+    double *x_temp_;                                     // holds temp x value for ecaulating fx
+    x_temp_ = new double[dimen_];
+
 
     for (int i=0; i<RK_ORDER_; i++){
         

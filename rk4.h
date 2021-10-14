@@ -25,6 +25,7 @@ private:
     int RK_ORDER_ = 4; 	    // 4th order RK equation system 
 
 
+
     double coeff_;                                      // variable for holding generic coefficient 
     double temp_coeffs_[4] = {0, 0.5, 0.5, 1};          // Coefficients for calculating x_temp, t_temp
     double K_coeffs_[4] = {1/6.0, 1/3.0, 1/3.0, 1/6.0}; // Coefficients of K for calc. x 
