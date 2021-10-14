@@ -59,7 +59,7 @@ int main(int argc, char **argv){
     printState(t, x, model->dimen());
 
     for (int i=0; i<user_i.timesteps; ++i){
-        integrator->Step(t, x);              // Integrate one timestep
+        integrator->Step(t-user_i.ICs[0], x);              // Integrate one timestep using t-t_0
         t += user_i.dt;                     // Update time
         printState(t, x, model->dimen());   // Print output
     }
