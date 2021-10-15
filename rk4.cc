@@ -31,6 +31,7 @@ int Rk4::Step(double t, double *x){
     double *x_temp_;                                     // holds temp x value for ecaulating fx
     x_temp_ = new double[dimen_];
 
+    sumArrays(x_sum_, x, x, 1, 0, dimen_); // reset x_sum equal to x 
 
     for (int i=0; i<RK_ORDER_; i++){
         
@@ -46,8 +47,8 @@ int Rk4::Step(double t, double *x){
         sumArrays(x_sum_, x_sum_, K_, 1, coeff_, dimen_); // X_sum += coeff*K
     }
 
-    delete x_temp_;
-    
+    delete x_temp_; // poss. memory fragmentation this way? Look into alternatives.
+
     // Finally set x equal to x_sum: 
     sumArrays(x, x_sum_, x, 1, 0, dimen_);
 
