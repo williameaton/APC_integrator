@@ -65,12 +65,3 @@ Either set of equations can currently be integrated using:
 - Example 2: <br> `$ ./ode_solve lv "1.0 0.2 0.1 0.2" "0.0 1.0 2.0" ab2 0.0005 100000 > lv_data.txt ` <br> conducts integration using the Adams-Bashforth method for the Lotka-Voltera equations using the following: &alpha;=1.0,  &beta;=0.2,  &gamma;=0.1,  &delta;=0.2,  t<sub>0</sub>=0.0,  X<sub>0</sub>=1.0,  Y<sub>0</sub>=2.0 and &Delta;t = 0.0005 seconds with 100000 timesteps. 
 
 
-
-## Still to be implemented: 
-
-- integrator-factory.cc
-- integrator-factory.h
-
-
-## Tasks in order: 
-- Write model factory 
